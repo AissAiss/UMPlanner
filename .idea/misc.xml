@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.265625" />
+        <entry key="app/src/main/res/drawable/layout_bg_url.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/ade_day.xml" value="0.30344202898550726" />
         <entry key="app/src/main/res/layout/ade_event.xml" value="0.33" />

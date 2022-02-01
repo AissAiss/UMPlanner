@@ -89,19 +89,24 @@ public class SecondFragment extends Fragment {
             }
             binding.layoutEventList.addView(ADEDayView);
             i++;
+            Toast.makeText(getContext(), "Add" + Integer.toString(i), Toast.LENGTH_LONG);
         }
         else{
             // Need to download
-            Log.d("File2S", "Pb fichier 2S");
+            Toast.makeText(getContext(), "Pb Fichier", Toast.LENGTH_LONG);
         }
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonAdd.setOnClickListener(view12 -> {
-            addDayInScrollView();
-        });
+        // TODO : Utiliser une méthode de ICS4J pour avoir le jours courant
+        addDayInScrollView();
+        addDayInScrollView();
+        addDayInScrollView();
+        addDayInScrollView();
+        addDayInScrollView();
+        addDayInScrollView();
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -113,7 +118,7 @@ public class SecondFragment extends Fragment {
                     int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
 
                     // if diff is zero, then the bottom has been reached
-                    if (diff == 0) {
+                    if (diff <= 40) {
                         // do stuff
                         //Toast.makeText(getContext(), "Event Scroll", Toast.LENGTH_SHORT).show();
                         addDayInScrollView();

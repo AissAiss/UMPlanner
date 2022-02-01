@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +17,8 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.um_planner_java.ICS4J.ADECalendar;
-import com.example.um_planner_java.ICS4J.ICSparser;
 import com.example.um_planner_java.databinding.FragmentFirstBinding;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class FirstFragment extends Fragment {
 
@@ -49,13 +42,9 @@ public class FirstFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void onClick(View view) {
-                //String getUrl = binding.textURL.getText().toString();
                 String getUrl = "https://proseconsult.umontpellier.fr/jsp/custom/modules/plannings/direct_cal.jsp?data=58c99062bab31d256bee14356aca3f2423c0f022cb9660eba051b2653be722c4a5f10b982f9b914f8b3df9a16d82f493dc5c094f7d1a811b903031bde802c7f56c5ce5d7b8d9b880fb6990772f87c6e42988e4003796ffd7b370c710463ddfae935a1cf1cb9242dad5cce9713b0bbcb9352abd8b23259769b84175e9ee785c7b,1";
 
-                // TODO : Stocker le nom du fichier cible dans R
-                //String title = "ADECal.ics";
                 String title = URLUtil.guessFileName(getUrl, null, null);
-
 
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(getUrl));
                 request.setTitle(title);
@@ -65,7 +54,6 @@ public class FirstFragment extends Fragment {
 
                 DownloadManager dm = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
                 dm.enqueue(request);
-
 
                 NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_SecondFragment);
             }

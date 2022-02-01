@@ -30,10 +30,15 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
+            android:background="@drawable/layout_bg_url"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
-            android:textSize="10sp" />
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:textSize="10sp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,6 +49,7 @@
                 android:id="@+id/btn_URL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:backgroundTint="@color/Saumon"
                 android:text="@string/first_fragment_getURL" />
 
@@ -53,11 +59,13 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/btn_Download"
+                android:id="@+id/btnDownload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:backgroundTint="@color/Bleu"
-                android:text="@string/first_fragment_download" />
+                android:text="@string/first_fragment_download"
+                tools:ignore="TextContrastCheck" />
         </LinearLayout>
 
     </LinearLayout>
