@@ -19,12 +19,6 @@
             android:gravity="bottom"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button_second"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/previous" />
-
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -34,6 +28,7 @@
                 android:id="@+id/button_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/Bleu"
                 android:text="Add" />
 
         </LinearLayout>
