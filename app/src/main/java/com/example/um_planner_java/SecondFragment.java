@@ -72,29 +72,28 @@ public class SecondFragment extends Fragment {
                     //cal.printAllEvent();
 
                     View ADEDayView = getLayoutInflater().inflate(R.layout.ade_day, null, false);
+                    TextView textViewDayDate = ADEDayView.findViewById(R.id.textViewDayDate);
                     LinearLayout layoutEvents =  ADEDayView.findViewById(R.id.LinearLayoutEvents);
 
                     //ADEEvent event = cal.getEvent(i);
                     ADEDay day = cal.getDay(i);
+                    textViewDayDate.setText(day.getDate());
 
-                    //List<ADEEvent> events = day.getAllEvents();
 
                     for(ADEEvent e : day.getAllEvents()){
                         View ADEEventView = getLayoutInflater().inflate(R.layout.ade_event, null, false);
 
-                        TextView textViewDate = ADEEventView.findViewById(R.id.textViewDate);
                         TextView textViewHourStart = ADEEventView.findViewById(R.id.textViewHourStart);
                         TextView textViewHourEnd = ADEEventView.findViewById(R.id.textViewHourEnd);
                         TextView textViewLocation = ADEEventView.findViewById(R.id.textViewLocation);
                         TextView textViewSummary = ADEEventView.findViewById(R.id.textViewSummary);
                         TextView textViewDescription = ADEEventView.findViewById(R.id.textViewDescription);
 
-                        textViewDate.setText(e.getDTSTART().getStringDate());
                         textViewHourStart.setText(e.getDTSTART().getStringHour());
                         textViewHourEnd.setText(e.getDTEND().getStringHour());
-                        textViewLocation.setText(e.getLOCATION());
-                        textViewSummary.setText(e.getSUMMARY());
-                        textViewDescription.setText(e.getDESCRIPTION());
+                        textViewLocation.setText(e.getLocation());
+                        textViewSummary.setText(e.getSummary());
+                        textViewDescription.setText(e.getDescription());
 
                         //Ajouter ADEEventView à ADEDayView
                         layoutEvents.addView(ADEEventView);
@@ -107,8 +106,6 @@ public class SecondFragment extends Fragment {
                     // Need to download
                     Log.d("File2S", "Pb fichier 2S");
                 }
-
-                //Toast.makeText(getContext(), "Add", Toast.LENGTH_SHORT).show();
             }
         });
     }

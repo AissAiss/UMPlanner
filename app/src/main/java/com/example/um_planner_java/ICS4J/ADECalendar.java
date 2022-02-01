@@ -81,8 +81,13 @@ public class ADECalendar {
 				DESCRIPTION   	= br.readLine(); 
 				DESC_TMP 		= br.readLine(); 
 				
-				while(!DESC_TMP.contains("LAST-MODIFIED:")) {
+				while(!DESC_TMP.contains("UID:")) {
 					DESCRIPTION += DESC_TMP; 
+					DESC_TMP = br.readLine();  
+				}
+				
+				while(!DESC_TMP.contains("LAST-MODIFIED:")) {
+					//DESCRIPTION += DESC_TMP; 
 					DESC_TMP = br.readLine();  
 				}
 				

@@ -1,18 +1,11 @@
 package com.example.um_planner_java.ICS4J;
-public class ADEEvent implements Comparable<ADEEvent>{
-	//DTSTART     : 2021 09 16 T 11 15 00Z    Date de début + Heure de début
-	//DTEND       : 2021 09 16 T 12 45 00Z    Heure de fin.  
-	//SUMMARY     : HAI708I                   Code de l'UE
-	//LOCATION    : SC36.09                   Salle 
-	//DESCRIPTION : Récupérer ce qu'on peut....
-	
-	// TODO : Refaire les get avec les noms plus précis
-	// TODO : Mieux découper les informations. 
+public class ADEEvent implements Comparable<ADEEvent>{	
 	private ADEDate 	DTSTART;
 	private ADEDate 	DTEND;  
-	private String 	SUMMARY; 
-	private String 	LOCATION; 
-	private String  DESCRIPTION;
+	
+	private String Summary; 
+	private String Location; 
+	private String Description; 
 	
 	public ADEEvent(ADEDate DTSTART, 
 					ADEDate DTEND, 
@@ -20,11 +13,12 @@ public class ADEEvent implements Comparable<ADEEvent>{
 					String LOCATION, 
 					String DESCRIPTION) {
 		super();
-		this.DTSTART = DTSTART;
-		this.DTEND = DTEND;
-		this.SUMMARY = SUMMARY;
-		this.LOCATION = LOCATION;
-		this.DESCRIPTION = DESCRIPTION;
+		this.DTSTART 		= DTSTART;
+		this.DTEND 			= DTEND;
+		// TODO : Améliorer le traitement des strings pour éviter les coquilles. 
+		this.Summary 		= SUMMARY.replace("SUMMARY:", "").replace("\\n", "").replace("\\", ""); 
+		this.Location 		= LOCATION.replace("LOCATION:", ""); 
+		this.Description 	= DESCRIPTION.replace("DESCRIPTION:", "").replace("\\n", " ").replace("\\", ""); 
 	}
 
 	public ADEDate getDTSTART() {
@@ -35,16 +29,20 @@ public class ADEEvent implements Comparable<ADEEvent>{
 		return DTEND;
 	}
 
-	public String getSUMMARY() {
-		return SUMMARY;
+	
+	public String getSummary() {
+		return this.Summary;
 	}
 
-	public String getLOCATION() {
-		return LOCATION;
+	
+	public String getLocation() {
+		return this.Location;
 	}
 
-	public String getDESCRIPTION() {
-		return DESCRIPTION;
+	
+	public String getDescription() {
+		// TODO : Mettre en forme la description
+		return this.Description;
 	}
 
 	@Override
@@ -52,9 +50,9 @@ public class ADEEvent implements Comparable<ADEEvent>{
 		return "ADEEvent [\n" + 
 				"\t" + DTSTART 		+ "\n" + 
 				"\t" + DTEND 		+ "\n" + 
-				"\t" + SUMMARY 		+ "\n" + 
-				"\t" + LOCATION 	+ "\n" + 
-				"\t" + DESCRIPTION 	+ "]";
+				"\t" + Summary 		+ "\n" + 
+				"\t" + Location 	+ "\n" + 
+				"\t" + Description 	+ "]";
 	}
 
 	@Override
