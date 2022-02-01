@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/ade_day.xml" value="0.30344202898550726" />
         <entry key="app/src/main/res/layout/ade_event.xml" value="0.33" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.1828125" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.264945652173913" />

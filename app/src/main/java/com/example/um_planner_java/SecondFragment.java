@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,11 +15,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.um_planner_java.ICS4J.ADECalendar;
+import com.example.um_planner_java.ICS4J.ADEDay;
 import com.example.um_planner_java.ICS4J.ADEEvent;
 import com.example.um_planner_java.ICS4J.ICSparser;
 import com.example.um_planner_java.databinding.FragmentSecondBinding;
 
 import java.io.File;
+import java.util.List;
 
 public class SecondFragment extends Fragment {
 
@@ -68,29 +71,37 @@ public class SecondFragment extends Fragment {
 
                     //cal.printAllEvent();
 
-                    View ADEEventView = getLayoutInflater().inflate(R.layout.ade_event, null, false);
+                    View ADEDayView = getLayoutInflater().inflate(R.layout.ade_day, null, false);
+                    LinearLayout layoutEvents =  ADEDayView.findViewById(R.id.LinearLayoutEvents);
 
-                    ADEEvent event = cal.getEvent(i);
+                    //ADEEvent event = cal.getEvent(i);
+                    ADEDay day = cal.getDay(i);
 
-                    TextView textViewDate = ADEEventView.findViewById(R.id.textViewDate);
-                    TextView textViewHourStart = ADEEventView.findViewById(R.id.textViewHourStart);
-                    TextView textViewHourEnd = ADEEventView.findViewById(R.id.textViewHourEnd);
-                    TextView textViewLocation = ADEEventView.findViewById(R.id.textViewLocation);
-                    TextView textViewSummary = ADEEventView.findViewById(R.id.textViewSummary);
-                    TextView textViewDescription = ADEEventView.findViewById(R.id.textViewDescription);
+                    //List<ADEEvent> events = day.getAllEvents();
 
-                    textViewDate.setText(event.getDTSTART().getStringDate());
-                    textViewHourStart.setText(event.getDTSTART().getStringHour());
-                    textViewHourEnd.setText(event.getDTEND().getStringHour());
-                    textViewLocation.setText(event.getLOCATION());
-                    textViewSummary.setText(event.getSUMMARY());
-                    //textViewDescription.setText(event.getDESCRIPTION());
+                    for(ADEEvent e : day.getAllEvents()){
+                        View ADEEventView = getLayoutInflater().inflate(R.layout.ade_event, null, false);
 
-                    binding.layoutEventList.addView(ADEEventView);
+                        TextView textViewDate = ADEEventView.findViewById(R.id.textViewDate);
+                        TextView textViewHourStart = ADEEventView.findViewById(R.id.textViewHourStart);
+                        TextView textViewHourEnd = ADEEventView.findViewById(R.id.textViewHourEnd);
+                        TextView textViewLocation = ADEEventView.findViewById(R.id.textViewLocation);
+                        TextView textViewSummary = ADEEventView.findViewById(R.id.textViewSummary);
+                        TextView textViewDescription = ADEEventView.findViewById(R.id.textViewDescription);
 
-                    i++; 
+                        textViewDate.setText(e.getDTSTART().getStringDate());
+                        textViewHourStart.setText(e.getDTSTART().getStringHour());
+                        textViewHourEnd.setText(e.getDTEND().getStringHour());
+                        textViewLocation.setText(e.getLOCATION());
+                        textViewSummary.setText(e.getSUMMARY());
+                        textViewDescription.setText(e.getDESCRIPTION());
 
+                        //Ajouter ADEEventView à ADEDayView
+                        layoutEvents.addView(ADEEventView);
 
+                    }
+                    binding.layoutEventList.addView(ADEDayView);
+                    i++;
                 }
                 else{
                     // Need to download
