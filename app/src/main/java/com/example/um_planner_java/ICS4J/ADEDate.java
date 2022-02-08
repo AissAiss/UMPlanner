@@ -23,6 +23,10 @@ public class ADEDate implements Comparable<ADEDate>{
 		this.minute = minute;
 	}
 	
+	public ADEDate(int day, int month, int year) {
+		this(day, month, year, 0, 0); 
+	}
+	
 	public ADEDate() {
 		this(0, 0, 0, 0, 0); 
 	}

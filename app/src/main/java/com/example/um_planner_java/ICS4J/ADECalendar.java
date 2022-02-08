@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -152,6 +153,30 @@ public class ADECalendar {
 			return this.Days.get(index); 
 		else 
 			return null;
+	}
+	
+	public List<ADEDay> getCurrentDays(){
+		// TODO : Renvoyer 4 jours avant et 5 jours après le jours courant. 
+		
+		return null;
+	}
+	
+	public int getIndexOfCurentDay() {
+		// Current day
+		LocalDateTime now = LocalDateTime.now(); 
+		int dd 	= now.getDayOfMonth(); 
+		int mm 	= now.getMonthValue(); 
+		int yy 	= now.getYear(); 
+		
+		int index = 0; 
+		ADEDay indexDay = this.Days.get(index); 
+		ADEDay currentDay = new ADEDay(new ADEDate(dd, mm, yy, 0, 0)); 
+		
+		while(indexDay.compareTo(currentDay) < 0) {
+			indexDay = this.Days.get(++index); 
+		}
+		
+		return index;
 	}
 	
 	/**

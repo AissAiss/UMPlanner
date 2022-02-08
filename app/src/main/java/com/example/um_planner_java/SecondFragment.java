@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.um_planner_java.ICS4J.ADECalendar;
 import com.example.um_planner_java.ICS4J.ADEDay;
@@ -36,64 +35,55 @@ public class SecondFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
+        loadADECalendar();
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
-    private void addDayInScrollView(){
-        String title = "direct_cal.jsp";
+    private void addDayInScrollView(int i){
 
+        @SuppressLint("InflateParams") View ADEDayView = getLayoutInflater().inflate(R.layout.ade_day, null, false);
+        TextView textViewDayDate = ADEDayView.findViewById(R.id.textViewDayDate);
+        LinearLayout layoutEvents =  ADEDayView.findViewById(R.id.LinearLayoutEvents);
+
+        //ADEEvent event = cal.getEvent(i);
+        ADEDay day = cal.getDay(i);
+        textViewDayDate.setText(day.getStringDate());
+
+
+        for(ADEEvent e : day.getAllEvents()){
+            @SuppressLint("InflateParams") View ADEEventView = getLayoutInflater().inflate(R.layout.ade_event, null, false);
+
+            TextView textViewHourStart = ADEEventView.findViewById(R.id.textViewHourStart);
+            TextView textViewHourEnd = ADEEventView.findViewById(R.id.textViewHourEnd);
+            TextView textViewLocation = ADEEventView.findViewById(R.id.textViewLocation);
+            TextView textViewSummary = ADEEventView.findViewById(R.id.textViewSummary);
+            TextView textViewDescription = ADEEventView.findViewById(R.id.textViewDescription);
+
+            textViewHourStart.setText(e.getDTSTART().getStringHour());
+            textViewHourEnd.setText(e.getDTEND().getStringHour());
+            textViewLocation.setText(e.getLocation());
+            textViewSummary.setText(e.getSummary());
+            textViewDescription.setText(e.getDescription());
+
+            //Ajouter ADEEventView à ADEDayView
+            layoutEvents.addView(ADEEventView);
+
+            }
+
+        binding.layoutEventList.addView(ADEDayView);
+        Toast.makeText(getContext(), "Add" + Integer.toString(i), Toast.LENGTH_LONG);
+    }
+
+    private void loadADECalendar(){
+        String title = "direct_cal.jsp";
         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), title);
 
-        if(file.exists()){
-
-            if(cal == null){
-                //Toast.makeText(getContext(), "Create the cal", Toast.LENGTH_SHORT).show();
+        if(file.exists()) {
+            if (cal == null) {
                 cal = ICSparser.getADECalendar(file);
+                i = cal.getIndexOfCurentDay();
             }
-
-
-            // Don't need to download
-            Log.d("File2S", "Fichier trouvé 2S");
-
-
-            //cal.printAllEvent();
-
-            @SuppressLint("InflateParams") View ADEDayView = getLayoutInflater().inflate(R.layout.ade_day, null, false);
-            TextView textViewDayDate = ADEDayView.findViewById(R.id.textViewDayDate);
-            LinearLayout layoutEvents =  ADEDayView.findViewById(R.id.LinearLayoutEvents);
-
-            //ADEEvent event = cal.getEvent(i);
-            ADEDay day = cal.getDay(i);
-            textViewDayDate.setText(day.getDate());
-
-
-            for(ADEEvent e : day.getAllEvents()){
-                @SuppressLint("InflateParams") View ADEEventView = getLayoutInflater().inflate(R.layout.ade_event, null, false);
-
-                TextView textViewHourStart = ADEEventView.findViewById(R.id.textViewHourStart);
-                TextView textViewHourEnd = ADEEventView.findViewById(R.id.textViewHourEnd);
-                TextView textViewLocation = ADEEventView.findViewById(R.id.textViewLocation);
-                TextView textViewSummary = ADEEventView.findViewById(R.id.textViewSummary);
-                TextView textViewDescription = ADEEventView.findViewById(R.id.textViewDescription);
-
-                textViewHourStart.setText(e.getDTSTART().getStringHour());
-                textViewHourEnd.setText(e.getDTEND().getStringHour());
-                textViewLocation.setText(e.getLocation());
-                textViewSummary.setText(e.getSummary());
-                textViewDescription.setText(e.getDescription());
-
-                //Ajouter ADEEventView à ADEDayView
-                layoutEvents.addView(ADEEventView);
-
-            }
-            binding.layoutEventList.addView(ADEDayView);
-            i++;
-            Toast.makeText(getContext(), "Add" + Integer.toString(i), Toast.LENGTH_LONG);
-        }
-        else{
-            // Need to download
-            Toast.makeText(getContext(), "Pb Fichier", Toast.LENGTH_LONG);
         }
     }
 
@@ -101,12 +91,11 @@ public class SecondFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // TODO : Utiliser une méthode de ICS4J pour avoir le jours courant
-        addDayInScrollView();
-        addDayInScrollView();
-        addDayInScrollView();
-        addDayInScrollView();
-        addDayInScrollView();
-        addDayInScrollView();
+
+
+        for(int j = i+6; i<j; i++){
+            addDayInScrollView(i);
+        }
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -121,7 +110,7 @@ public class SecondFragment extends Fragment {
                     if (diff <= 40) {
                         // do stuff
                         //Toast.makeText(getContext(), "Event Scroll", Toast.LENGTH_SHORT).show();
-                        addDayInScrollView();
+                        addDayInScrollView(i);
                     }
 
                 }
