@@ -87,6 +87,12 @@ public class FirstFragment extends Fragment {
             public void onClick(View v) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://app.umontpellier.fr/prose-etudiant/protected/planning"));
                 startActivity(browserIntent);
+
+                //Uri gmmIntentUri = Uri.parse("https://www.google.fr/maps/@43.6315779,3.8624507,3a,75y,225.72h,85.43t/data=!3m8!1e1!3m6!1sAF1QipMxDmYJ7vMVSXpAmaaRazK6IdI4hcBix-1CGK-q!2e10!3e11!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipMxDmYJ7vMVSXpAmaaRazK6IdI4hcBix-1CGK-q%3Dw203-h100-k-no-pi-0-ya246.07417-ro0-fo100!7i10000!8i5000");
+                //Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                //mapIntent.setPackage("com.google.android.apps.maps");
+
+                //startActivity(mapIntent);
             }
         });
     }
