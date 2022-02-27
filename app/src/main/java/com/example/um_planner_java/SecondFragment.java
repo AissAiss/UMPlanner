@@ -46,7 +46,6 @@ public class SecondFragment extends Fragment {
         TextView textViewDayDate = ADEDayView.findViewById(R.id.textViewDayDate);
         LinearLayout layoutEvents =  ADEDayView.findViewById(R.id.LinearLayoutEvents);
 
-        //ADEEvent event = cal.getEvent(i);
         ADEDay day = cal.getDay(i);
         textViewDayDate.setText(day.getStringDate());
 
@@ -104,13 +103,18 @@ public class SecondFragment extends Fragment {
                 public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                     ScrollView scrollView = binding.scrollViewEventList;
                     View view = (View) scrollView.getChildAt(scrollView.getChildCount() - 1);
-                    int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
+                    int diffDown = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
+                    int diffUp = scrollView.getScrollY();
 
                     // if diff is zero, then the bottom has been reached
-                    if (diff <= 40) {
+
+                    //Log.d("SCROLTEST", "Event Scroll : " + diffUp);
+
+                    if (diffDown <= 10) {
                         // do stuff
-                        //Toast.makeText(getContext(), "Event Scroll", Toast.LENGTH_SHORT).show();
                         addDayInScrollView(i);
+                    } else if(diffUp <= 0){
+                        Toast.makeText(getContext(), "Event Up: " + diffUp, Toast.LENGTH_SHORT).show();
                     }
 
                 }

@@ -67,7 +67,7 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String getUrl = "https://proseconsult.umontpellier.fr/jsp/custom/modules/plannings/direct_cal.jsp?data=58c99062bab31d256bee14356aca3f2423c0f022cb9660eba051b2653be722c4a5f10b982f9b914f8b3df9a16d82f493dc5c094f7d1a811b903031bde802c7f56c5ce5d7b8d9b880fb6990772f87c6e42988e4003796ffd7b370c710463ddfae935a1cf1cb9242dad5cce9713b0bbcb9352abd8b23259769b84175e9ee785c7b,1";
-                //String getUrl = "https://geo.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2FGEO.2Fvar.2Fgeo.2Fstorage.2Fimages.2Fmedia.2Fsa-domestication-n-a-pas-emousse-l-instinct-de-ce-chasseur-hors-pair.2F2052028-1-fre-FR.2Fsa-domestication-n-a-pas-emousse-l-instinct-de-ce-chasseur-hors-pair.2Ejpg/1150x647/background-color/ffffff/quality/70/chat-quand-minou-devient-un-tueur-en-serie.jpg";
+
 
                 String title = URLUtil.guessFileName(getUrl, null, null);
 
@@ -79,6 +79,14 @@ public class FirstFragment extends Fragment {
 
                 DownloadManager downloadManager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
                 downloadID = downloadManager.enqueue(request);
+            }
+        });
+
+        binding.btnFoundURL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://app.umontpellier.fr/prose-etudiant/protected/planning"));
+                startActivity(browserIntent);
             }
         });
     }
